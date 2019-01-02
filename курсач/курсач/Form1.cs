@@ -13,7 +13,7 @@ namespace курсач
         private char[] word;
         private int imageIndex;
         private int imatrue;
-        private void Button1_Click(object sender, EventArgs e)
+        private void ButtonStartGameСlick(object sender, EventArgs e)
         {
             text = textBox1.Text; // Обнуляем все переменные
             imageIndex = 0;
@@ -24,7 +24,7 @@ namespace курсач
             word = dots.ToCharArray();
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void ButtonMakeAttemptClick(object sender, EventArgs e)
         {
             var words = false;
             
