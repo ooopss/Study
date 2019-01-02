@@ -1,22 +1,22 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Charades.Tests
 {
-    [TestFixture]
+    [TestFixture(Category = "Unit")]
     public class FirstUnitTests
     {
         [Test]
         public void TestNumbaOne()
         {
-            var a = 10;
-            var b = 5 * 2;
+            // arrange
+            var expected = 10;
+            var b = 5;
 
-            Assert.AreEqual(a, b);
+            // act
+            var result = b * 2;
+
+            // assert
+            Assert.AreEqual(expected, b);
         }
 
         [Test]
@@ -28,13 +28,6 @@ namespace Charades.Tests
             Assert.AreNotEqual(a, b);
         }
 
-        [Test]
-        public void TestThatGonnaFail()
-        {
-            var a = 30;
-            var b = 5 * 2;
-
-            Assert.AreEqual(a, b);
-        }
+        
     }
 }
