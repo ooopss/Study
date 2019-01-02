@@ -8,5 +8,6 @@ namespace Charades.Tests
 {
     public class Class1
     {
+        // внесем правки =)
     }
 }
