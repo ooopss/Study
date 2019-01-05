@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "курсач", "курсач\курсач.csproj", "{7C4C8F9D-48A5-4B1E-AE72-4EAC885B9644}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Charades", "Charades\Charades.csproj", "{7C4C8F9D-48A5-4B1E-AE72-4EAC885B9644}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Charades.Tests", "Charades.Tests\Charades.Tests.csproj", "{784ED79E-BCC9-4E84-93D8-90DD3D67028F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7C4C8F9D-48A5-4B1E-AE72-4EAC885B9644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C4C8F9D-48A5-4B1E-AE72-4EAC885B9644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C4C8F9D-48A5-4B1E-AE72-4EAC885B9644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{784ED79E-BCC9-4E84-93D8-90DD3D67028F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{784ED79E-BCC9-4E84-93D8-90DD3D67028F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{784ED79E-BCC9-4E84-93D8-90DD3D67028F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{784ED79E-BCC9-4E84-93D8-90DD3D67028F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
