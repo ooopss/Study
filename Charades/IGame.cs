@@ -1,8 +1,5 @@
 ﻿namespace курсач
 {
- /// <summary>
- /// 
- /// </summary>
     public interface IGame
     {
         /// <summary>
@@ -26,9 +23,4 @@
         /// <returns></returns>
         AttemptResult MakeAttempt(char c);
     }
- 
-
-  
-    
-    
 }

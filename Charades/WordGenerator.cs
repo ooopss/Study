@@ -1,20 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace курсач
 {
-    class WordGenerator
+    public class WordGenerator : IWordGenerator
     {
-        private readonly IReadOnlyCollection _words;
+        private readonly IList<string> _words ;
         public string GetNewWord()
         {
-            throw new System.NotImplementedException();
+            var word = _words[new Random().Next(0, _words.Count)];
+            return word;
         }
 
         public WordGenerator()
         {
-            _words[] arr = { "интуиция", "пользователей", "чиновник", "имущество", "телефон", "марганец" }
-             _words _word = arr[new Random().Next(0, arr.Length)];
-            return _word;
+            _words = new [] { "интуиция", "пользователей", "чиновник", "имущество", "телефон", "марганец" };
         }
     }
 }

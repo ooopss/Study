@@ -3,41 +3,21 @@ using System.Linq;
 
 namespace курсач
 {
-    public class WordGenerator : IWordGenerator
-    {
-        private readonly IReadOnlyCollection _words;
-        public string GetNewWord()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public WordGenerator()
-        {
-            _words [] arr  = { "интуиция", "пользователей", "чиновник", "имущество", "телефон", "марганец" }
-            _words _word = arr[new Random().Next(0, arr.Length)];
-            return _word;
-        }
-
-       
-        
-    }
-    
-
     public class Game : IGame
-    
+
     {
         private readonly IWordGenerator _wordGenerator;
         public string Word { get; set; }
         public int AttemptCounter { get; set; }
 
-      public Game(IWordGenerator wordGenerator)
+        public Game(IWordGenerator wordGenerator)
         {
             _wordGenerator = wordGenerator;
         }
-        
+
         public AttemptResult MakeAttempt(char c)
         {
-           if (AttemptCounter > 9)
+            if (AttemptCounter > 9)
             {
                 return new AttemptResult { IsGameFailed = true };
             }
