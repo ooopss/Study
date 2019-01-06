@@ -3,6 +3,20 @@ using System.Linq;
 
 namespace курсач
 {
+    public class WordGenerator : IWordGenerator
+    {
+        private IReadOnlyCollection<string> _words;
+       
+         public WordGenerator()
+         {
+            _words = new[] { "Интуицая", "слово2" }
+          }
+
+    
+    }
+
+
+
     public class Game : IGame
     {
         private readonly IWordGenerator _wordGenerator;
@@ -13,8 +27,7 @@ namespace курсач
         {
             _wordGenerator = wordGenerator;
         }
-
-
+        
         public AttemptResult MakeAttempt(char c)
         {
            if (AttemptCounter > 9)
