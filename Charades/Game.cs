@@ -13,13 +13,19 @@ namespace курсач
 
         public WordGenerator()
         {
-            _words = new[] { "интуиция", "пользователей", "дом", "море", "телефон" }
+            _words [] arr  = { "интуиция", "пользователей", "чиновник", "имущество", "телефон", "марганец" }
+            _words _word = arr[new Random().Next(0, arr.Length)];
+            return _word;
         }
+
+       
+        
     }
+    
 
     public class Game : IGame
     
-{
+    {
         private readonly IWordGenerator _wordGenerator;
         public string Word { get; set; }
         public int AttemptCounter { get; set; }

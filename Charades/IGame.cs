@@ -1,11 +1,30 @@
 ﻿namespace курсач
 {
+ /// <summary>
+ /// 
+ /// </summary>
     public interface IGame
     {
-        SingleGameCredentials StartSingleGame(); //Учетные данные для одиночной игры Начать одиночную игру();
-        DualGameCredentials StartDualGame(DualGameSettings settings);//Двойные игровые данные 
-        //Запустить двойную игру(настройки)
-        AttemptResult MakeAttempt(char c);// Попытка Результат. Сделатьпопытку(символ c);
+        /// <summary>
+        /// Учетные данные для одиночной игры Начать одиночную игру();
+        /// </summary>
+        /// <returns></returns>
+        SingleGameCredentials StartSingleGame();
+       
+        /// <summary>
+        /// Двойные игровые данные 
+        /// Запустить двойную игру(настройки)
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <returns></returns>
+        DualGameCredentials StartDualGame(DualGameSettings settings);
+        
+        /// <summary>
+        /// Попытка Результат. Сделатьпопытку(символ c);
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        AttemptResult MakeAttempt(char c);
     }
  
 
