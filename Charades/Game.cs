@@ -9,15 +9,14 @@ namespace курсач
         public string Word { get; set; }
         public int AttemptCounter { get; set; }
 
-      public Game(IWordGenerator wordGenerator)
+        public Game(IWordGenerator wordGenerator)
         {
             _wordGenerator = wordGenerator;
         }
 
-
         public AttemptResult MakeAttempt(char c)
         {
-           if (AttemptCounter > 9)
+            if (AttemptCounter > 9)
             {
                 return new AttemptResult { IsGameFailed = true };
             }
