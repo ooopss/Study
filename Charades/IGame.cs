@@ -7,13 +7,7 @@
         //Запустить двойную игру(настройки)
         AttemptResult MakeAttempt(char c);// Попытка Результат. Сделатьпопытку(символ c);
     }
-    public class WordGenerator : IWordGenerator
-    {
-        public string GetNewWord()
-        {
-            throw new System.NotImplementedException();
-        }
-    }
+ 
 
   
     

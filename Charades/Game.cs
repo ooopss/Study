@@ -5,20 +5,21 @@ namespace курсач
 {
     public class WordGenerator : IWordGenerator
     {
-        private IReadOnlyCollection<string> _words;
-       
-         public WordGenerator()
-         {
-            _words = new[] { "Интуицая", "слово2" }
-          }
+        private readonly IReadOnlyCollection _words;
+        public string GetNewWord()
+        {
+            throw new System.NotImplementedException();
+        }
 
-    
+        public WordGenerator()
+        {
+            _words = new[] { "интуиция", "пользователей", "дом", "море", "телефон" }
+        }
     }
 
-
-
     public class Game : IGame
-    {
+    
+{
         private readonly IWordGenerator _wordGenerator;
         public string Word { get; set; }
         public int AttemptCounter { get; set; }
