@@ -3,24 +3,23 @@
     public interface IGame
     {
         /// <summary>
-        /// Учетные данные для одиночной игры Начать одиночную игру();
+        /// Начать одиночную игру
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Учетные данные для одиночной игры</returns>
         SingleGameCredentials StartSingleGame();
-       
+
         /// <summary>
-        /// Двойные игровые данные 
-        /// Запустить двойную игру(настройки)
+        /// Запустить двойную игру
         /// </summary>
-        /// <param name="settings"></param>
-        /// <returns></returns>
+        /// <param name="settings">Настройки игры</param>
+        /// <returns>Двойные игровые данные </returns>
         DualGameCredentials StartDualGame(DualGameSettings settings);
         
         /// <summary>
-        /// Попытка Результат. Сделатьпопытку(символ c);
+        /// Сделать попытку угадать слово по букве
         /// </summary>
-        /// <param name="c"></param>
-        /// <returns></returns>
+        /// <param name="c">Буква, которую пытаются отгадать</param>
+        /// <returns>Результат попытки</returns>
         AttemptResult MakeAttempt(char c);
     }
 }

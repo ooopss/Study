@@ -4,7 +4,6 @@ using System.Linq;
 namespace курсач
 {
     public class Game : IGame
-
     {
         private readonly IWordGenerator _wordGenerator;
         public string Word { get; set; }
