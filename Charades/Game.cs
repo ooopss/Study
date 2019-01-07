@@ -14,6 +14,10 @@ namespace курсач
             _wordGenerator = wordGenerator;
         }
 
+        public Game()
+        {
+        }
+
         public AttemptResult MakeAttempt(char c)
         {
             if (AttemptCounter > 9)

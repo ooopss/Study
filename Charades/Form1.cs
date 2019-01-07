@@ -3,13 +3,18 @@ using System.Drawing;
 using System.Windows.Forms;
 namespace курсач
 {
-	public partial class Form1 : Form
+  
+        public partial class Form1 : Form
 	{
 		public Form1()
+
 		{
 			InitializeComponent();
-		}
-		private string text;
+            _game = new Game();
+        }
+        private char[] _letters;
+        private IGame _game;
+        private string text;
 		private char[] word;
 		private int imageIndex;
 		private int imatrue;
@@ -28,8 +33,13 @@ namespace курсач
 		private void ButtonMakeAttemptClick(object sender, EventArgs e)
 		{
 			var words = false;
+            string _game;
+            if (radioButton1.Checked) _game = label1.Length;
 
-			if (textBox2.Text.Length == 1) // Для одной буквы
+            if (radioButton2.Checked) 
+                else MessageBox.Show("Вы не выбрали способ игры! ");
+
+            if (textBox2.Text.Length == 1) // Для одной буквы
 			{
 				for (int i = 0; i < text.Length; i++)
 				{
@@ -63,7 +73,6 @@ namespace курсач
 						label1.Text = text;
 					}
 				}
-
 			}
 			else if (textBox2.Text.Length > 1) // Для полного ответа
 			{
@@ -88,5 +97,5 @@ namespace курсач
 		{
 			pictureBox1.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject("image" + imageIndex.ToString());
 		}
-	}
+    }
 }
