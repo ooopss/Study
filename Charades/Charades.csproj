@@ -57,7 +57,6 @@
     </Compile>
     <Compile Include="Game.cs" />
     <Compile Include="IGame.cs" />
-    <Compile Include="IMainForm.cs" />
     <Compile Include="IWordGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
