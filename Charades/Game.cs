@@ -20,10 +20,10 @@ namespace курсач
 			{
 				return new AttemptResult { IsGameFailed = true };
 			}
-			AttemptCounter++;
 
 			if (!Word.Contains(c))
 			{
+				AttemptCounter++;
 				return new AttemptResult { IsSuccess = false };
 			}
 
@@ -37,12 +37,16 @@ namespace курсач
 
 		public DualGameCredentials StartDualGame(DualGameSettings settings)
 		{
+			AttemptCounter = 0;
+
 			Word = settings.Word;
 			return new DualGameCredentials();
 		}
 
 		public SingleGameCredentials StartSingleGame()
 		{
+			AttemptCounter = 0;
+
 			Word = _wordGenerator.GetNewWord();
 
 			var singleGameCredentials = new SingleGameCredentials();

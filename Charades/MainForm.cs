@@ -38,6 +38,7 @@ namespace курсач
 			{
 				// преобразовать к ниженму регистру, ведь Кошка == кошка
 				var word = TextBoxWord.Text.Trim().ToLower();
+				TextBoxWord.Text = string.Empty;
 
 				var settings = new DualGameSettings
 				{
@@ -92,6 +93,8 @@ namespace курсач
 
 			UpdateImage();
 			ShowLetters();
+
+			TextBoxAttempt.Text = string.Empty;
 		}
 
 		private void ShowLetters()
@@ -108,6 +111,11 @@ namespace курсач
 			}
 			pictureBox1.Image = (Bitmap)Properties.Resources.ResourceManager
 				.GetObject("image" + _imageIndex.ToString());
+		}
+
+		private void RadioButtonDoubleCheckedChanged(object sender, EventArgs e)
+		{
+			TextBoxWord.Enabled = RadioButtonDouble.Checked;
 		}
 	}
 }

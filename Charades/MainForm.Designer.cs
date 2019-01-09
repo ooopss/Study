@@ -74,6 +74,8 @@
 			// 
 			// TextBoxWord
 			// 
+			this.TextBoxWord.Enabled = false;
+			this.TextBoxWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.TextBoxWord.Location = new System.Drawing.Point(306, 79);
 			this.TextBoxWord.Multiline = true;
 			this.TextBoxWord.Name = "TextBoxWord";
@@ -82,6 +84,7 @@
 			// 
 			// TextBoxAttempt
 			// 
+			this.TextBoxAttempt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.TextBoxAttempt.Location = new System.Drawing.Point(306, 193);
 			this.TextBoxAttempt.Multiline = true;
 			this.TextBoxAttempt.Name = "TextBoxAttempt";
@@ -100,6 +103,7 @@
 			// RadioButtonSingle
 			// 
 			this.RadioButtonSingle.AutoSize = true;
+			this.RadioButtonSingle.Checked = true;
 			this.RadioButtonSingle.Location = new System.Drawing.Point(6, 20);
 			this.RadioButtonSingle.Name = "RadioButtonSingle";
 			this.RadioButtonSingle.Size = new System.Drawing.Size(107, 17);
@@ -115,9 +119,9 @@
 			this.RadioButtonDouble.Name = "RadioButtonDouble";
 			this.RadioButtonDouble.Size = new System.Drawing.Size(95, 17);
 			this.RadioButtonDouble.TabIndex = 8;
-			this.RadioButtonDouble.TabStop = true;
 			this.RadioButtonDouble.Text = "игра на двоих";
 			this.RadioButtonDouble.UseVisualStyleBackColor = true;
+			this.RadioButtonDouble.CheckedChanged += new System.EventHandler(this.RadioButtonDoubleCheckedChanged);
 			// 
 			// groupBox1
 			// 
@@ -143,7 +147,7 @@
 			this.Controls.Add(this.ButtonMakeAttempt);
 			this.Controls.Add(this.ButtonStartGame);
 			this.Name = "MainForm";
-			this.Text = "Form1";
+			this.Text = "Виселица";
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
