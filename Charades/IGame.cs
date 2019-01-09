@@ -21,5 +21,10 @@
         /// <param name="c">Буква, которую пытаются отгадать</param>
         /// <returns>Результат попытки</returns>
         AttemptResult MakeAttempt(char c);
-    }
+
+		/// <summary>
+		/// Загаданное слово
+		/// </summary>
+		string Word { get; set; }
+	}
 }
