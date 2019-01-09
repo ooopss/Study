@@ -11,12 +11,14 @@ namespace курсач
 		// TODO research можно ли реализовать INotifyPropertyChanged для _letters и _imageIndex
 		private char[] _letters;
 		private int _imageIndex;
+		private readonly LeadersManager _manager;
 
 		public MainForm()
 		{
 			InitializeComponent();
 
 			_game = new Game(new WordGenerator());
+			_manager = new LeadersManager();
 		}
 
 		/// <summary>
@@ -76,7 +78,7 @@ namespace курсач
 				// для каждой позиции из угаданных показать букву
 				foreach (var item in result.AllLetterPositions)
 				{
-					_letters[item] = letter;
+					_letters[item] = letter;	
 				}
 			}
 			else if (result.IsGameFailed) // game over
