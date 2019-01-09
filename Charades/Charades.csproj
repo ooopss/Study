@@ -57,7 +57,7 @@
     </Compile>
     <Compile Include="Game.cs" />
     <Compile Include="IGame.cs" />
-    <Compile Include="ILeadersManager .cs" />
+    <Compile Include="ILeadersManager.cs" />
     <Compile Include="IWordGenerator.cs" />
     <Compile Include="LeaderRecord.cs" />
     <Compile Include="LeadersManager.cs" />
