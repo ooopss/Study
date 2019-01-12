@@ -15,12 +15,17 @@ namespace курсач
 		public LeadersForm()
 		{
 			InitializeComponent();
-			var leaders = _manager.GetLeaders();
+			
 		}
 
-		private void LeadersForm_Load(object sender, EventArgs e)
+		public LeadersForm(MainForm f)
 		{
+			InitializeComponent();
+		}
 
+		private void button1_Click(object sender, EventArgs e)
+		{
+			this.Close();
 		}
 	}
 }

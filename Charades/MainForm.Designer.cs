@@ -145,6 +145,7 @@
 			this.button1.TabIndex = 10;
 			this.button1.Text = "Рейтинг победителей ";
 			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// MainForm
 			// 
