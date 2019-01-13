@@ -19,6 +19,7 @@ namespace курсач
 		{
 			InitializeComponent();
 
+			// Создаем зависимости
 			_game = new Game(new WordGenerator());
 			_manager = new LeadersManager();
 		}
@@ -89,7 +90,7 @@ namespace курсач
 				// для каждой позиции из угаданных показать букву
 				foreach (var item in result.AllLetterPositions)
 				{
-					_letters[item] = letter;	
+					_letters[item] = letter;
 				}
 
 				if (result.IsWordGuessed)
