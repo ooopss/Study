@@ -1,31 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace курсач
 {
 	public partial class LeadersForm : Form
 	{
-		public LeadersForm()
+		private readonly IReadOnlyCollection<LeaderRecord> _records;
+
+		public LeadersForm(ILeadersManager manager)
 		{
 			InitializeComponent();
-			
+
+			_records = manager.GetAllRecords();
+			dataGridView1.DataSource = _records;
 		}
 
-		public LeadersForm(MainForm f)
+		private void ButtonCloseClick(object sender, EventArgs e)
 		{
-			InitializeComponent();
-		}
-
-		private void button1_Click(object sender, EventArgs e)
-		{
-			this.Close();
+			Close();
 		}
 	}
 }

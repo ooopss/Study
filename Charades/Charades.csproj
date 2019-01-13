@@ -67,6 +67,12 @@
     <Compile Include="IWordGenerator.cs" />
     <Compile Include="LeaderRecord.cs" />
     <Compile Include="LeadersManager.cs" />
+    <Compile Include="NewName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewName.Designer.cs">
+      <DependentUpon>NewName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingleGameCredentials.cs" />
@@ -76,6 +82,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewName.resx">
+      <DependentUpon>NewName.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

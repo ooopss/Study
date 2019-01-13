@@ -3,9 +3,21 @@
 
 namespace курсач
 {
+	/// <summary>
+	/// Отвечает за управление списком лидеров и его получением
+	/// </summary>
     public interface ILeadersManager
     {
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
         IReadOnlyCollection<LeaderRecord> GetAllRecords();
-        void SaveLeaderResult(LeaderRecord newItem);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="newItem"></param>
+		void SaveLeaderResult(LeaderRecord newItem);
     }
 }

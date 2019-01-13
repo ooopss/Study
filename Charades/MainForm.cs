@@ -11,7 +11,9 @@ namespace курсач
 		// TODO research можно ли реализовать INotifyPropertyChanged для _letters и _imageIndex
 		private char[] _letters;
 		private int _imageIndex;
-		private readonly LeadersManager _manager;
+		private readonly ILeadersManager _manager;
+		private string _playerName;
+		private DateTime _startTime;
 
 		public MainForm()
 		{
@@ -28,6 +30,14 @@ namespace курсач
 		/// <param name="e"></param>
 		private void ButtonStartGameClick(object sender, EventArgs e)
 		{
+			using(var newNameForm = new NewName())
+			{
+				newNameForm.ShowDialog();
+				_playerName = newNameForm.PlayerName;
+			}
+
+			_startTime = DateTime.Now;
+
 			var isSingleGame = RadioButtonSingle.Checked;
 			if (isSingleGame)
 			{
@@ -66,6 +76,7 @@ namespace курсач
 			var text = TextBoxAttempt.Text.ToLower(); // преобразуем текстовый ввод в нижний регистр
 			if (text.Length == 0)
 			{
+				TextBoxAttempt.Focus();
 				return;
 			}
 
@@ -80,12 +91,32 @@ namespace курсач
 				{
 					_letters[item] = letter;	
 				}
+
+				if (result.IsWordGuessed)
+				{
+					var newItem = new LeaderRecord
+					{
+						Name = _playerName,
+						ElapsedTime = DateTime.Now - _startTime,
+						Date = DateTime.Today,
+						Word = _game.Word,
+						WrongAttempts = _game.WrongAttemptsCount
+					};
+
+					_manager.SaveLeaderResult(newItem);
+
+					MessageBox.Show("Вы победили!");
+				}
 			}
 			else if (result.IsGameFailed) // game over
 			{
 				// показать полную виселицу и слово целиком
 				_imageIndex = 10;
 				_letters = _game.Word.ToCharArray();
+			}
+			else if (result.IsAttemptDuplicated)
+			{
+				MessageBox.Show("Уже было...");
 			}
 			else // попытка неудачная
 			{
@@ -97,6 +128,7 @@ namespace курсач
 			ShowLetters();
 
 			TextBoxAttempt.Text = string.Empty;
+			TextBoxAttempt.Focus();
 		}
 
 		private void ShowLetters()
@@ -120,10 +152,12 @@ namespace курсач
 			TextBoxWord.Enabled = RadioButtonDouble.Checked;
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void ButtonShowLeadersClick(object sender, EventArgs e)
 		{
-			LeadersForm newLeadersForm = new LeadersForm(this);
-			newLeadersForm.Show();
+			using (var newLeadersForm = new LeadersForm(_manager))
+			{
+				newLeadersForm.ShowDialog();
+			}
 		}
 	}
 }

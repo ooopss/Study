@@ -6,38 +6,57 @@ namespace курсач
 	public class Game : IGame
 	{
 		private readonly IWordGenerator _wordGenerator;
+		private int _lettersGuessedCount;
+
+		public List<char> LettersTryed { get; }
+
 		public string Word { get; set; }
-		public int AttemptCounter { get; set; }
+		
+		public int WrongAttemptsCount { get; set; }
 
 		public Game(IWordGenerator wordGenerator)
 		{
 			_wordGenerator = wordGenerator;
+			LettersTryed = new List<char>();
 		}
 
 		public AttemptResult MakeAttempt(char c)
 		{
-			if (AttemptCounter > 9)
+			if (LettersTryed.Exists(x => x == c))
+			{
+				return new AttemptResult { IsAttemptDuplicated = true };
+			}
+			LettersTryed.Add(c);
+
+			if (WrongAttemptsCount > 9)
 			{
 				return new AttemptResult { IsGameFailed = true };
 			}
 
 			if (!Word.Contains(c))
 			{
-				AttemptCounter++;
+				WrongAttemptsCount++;
 				return new AttemptResult { IsSuccess = false };
 			}
 
-			var allPositions = GetAllPositions(c.ToString());
 
-			var result = new AttemptResult();
-			result.AllLetterPositions = allPositions;
-			result.IsSuccess = true;
+			var allPositions = GetAllPositions(c.ToString());
+			_lettersGuessedCount += allPositions.Count;
+
+			var result = new AttemptResult
+			{
+				AllLetterPositions = allPositions,
+				IsSuccess = true,
+				IsWordGuessed = (_lettersGuessedCount == Word.Length)
+			};
 			return result;
 		}
 
 		public DualGameCredentials StartDualGame(DualGameSettings settings)
 		{
-			AttemptCounter = 0;
+			WrongAttemptsCount = 0;
+			_lettersGuessedCount = 0;
+			LettersTryed.Clear();
 
 			Word = settings.Word;
 			return new DualGameCredentials();
@@ -45,7 +64,9 @@ namespace курсач
 
 		public SingleGameCredentials StartSingleGame()
 		{
-			AttemptCounter = 0;
+			WrongAttemptsCount = 0;
+			_lettersGuessedCount = 0;
+			LettersTryed.Clear();
 
 			Word = _wordGenerator.GetNewWord();
 

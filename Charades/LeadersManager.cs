@@ -19,18 +19,23 @@ namespace курсач
 				var record = new LeaderRecord
 				{
 					Name = items[0],
-					Score = int.Parse(items[1]),
-					Date = DateTime.Parse(items[2])
+					ElapsedTime = TimeSpan.Parse(items[1]),
+					Date = DateTime.Parse(items[2]),
+					Word = items[3],
+					WrongAttempts = int.Parse(items[4])
 				};
 				records.Add(record);
 			}
-			return records.OrderByDescending(x => x.Score).Take(10).ToArray();
+			return records
+				.OrderBy(x => x.ElapsedTime)
+				.Take(10)
+				.ToArray();
 		}
 
 
 		public void SaveLeaderResult(LeaderRecord newItem)
 		{
-			var newLine = $"{newItem.Name},{newItem.Score},{newItem.Date}";
+			var newLine = $"{newItem.Name},{newItem.ElapsedTime},{newItem.Date},{newItem.Word},{newItem.WrongAttempts}";
 			File.AppendAllLines(_filePath, new[] { newLine });
 		}
 	}
