@@ -112,8 +112,9 @@ namespace курсач
 			else if (result.IsGameFailed) // game over
 			{
 				// показать полную виселицу и слово целиком
-				_imageIndex = 10;
+				_imageIndex = 9;
 				_letters = _game.Word.ToCharArray();
+				MessageBox.Show("Вы проиграли!");
 			}
 			else if (result.IsAttemptDuplicated)
 			{
