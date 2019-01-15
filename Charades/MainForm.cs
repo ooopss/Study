@@ -89,54 +89,54 @@ namespace курсач
 			switch (result.Status)
 			{
 				case AttemptStatus.WordGuessed: // слово угадано целиком
-				{
-					var newItem = new LeaderRecord
 					{
-						Name = _playerName,
-						ElapsedTime = DateTime.Now - _startTime,
-						Date = DateTime.Today,
-						Word = _game.Word,
-						WrongAttempts = _game.WrongAttemptsCount
-					};
+						var newItem = new LeaderRecord
+						{
+							Name = _playerName,
+							ElapsedTime = DateTime.Now - _startTime,
+							Date = DateTime.Today,
+							Word = _game.Word,
+							WrongAttempts = _game.WrongAttemptsCount
+						};
 
-					_manager.SaveLeaderResult(newItem);
-					_letters = _game.Word.ToCharArray();
+						_manager.SaveLeaderResult(newItem);
+						_letters = _game.Word.ToCharArray();
 
-					MessageBox.Show("Вы победили!");
-					break;
-				}
-				case AttemptStatus.LetterGuessed: // успешная попытка
-				{
-					// для каждой позиции из угаданных показать букву
-					foreach (var item in result.AllLetterPositions)
-					{
-						_letters[item] = letter;
+						MessageBox.Show("Вы победили!");
+						break;
 					}
-					break;
-				}
+				case AttemptStatus.LetterGuessed: // успешная попытка
+					{
+						// для каждой позиции из угаданных показать букву
+						foreach (var item in result.AllLetterPositions)
+						{
+							_letters[item] = letter;
+						}
+						break;
+					}
 				case AttemptStatus.GameFailed: // game over
-				{
-					// показать полную виселицу и слово целиком
-					_imageIndex = 9;
-					_letters = _game.Word.ToCharArray();
-					MessageBox.Show("Вы проиграли!");
-					break;
-				}
+					{
+						// показать полную виселицу и слово целиком
+						_imageIndex = 9;
+						_letters = _game.Word.ToCharArray();
+						MessageBox.Show("Вы проиграли!");
+						break;
+					}
 				case AttemptStatus.Duplicated:
-				{
-					MessageBox.Show("Уже было...");
-					break;
-				}
+					{
+						MessageBox.Show("Уже было...");
+						break;
+					}
 				case AttemptStatus.Failed: // попытка неудачная
-				{
-					// прибавить 1 к индексу текущего изображения
-					_imageIndex++;
-					break;
-				}
+					{
+						// прибавить 1 к индексу текущего изображения
+						_imageIndex++;
+						break;
+					}
 				default:
-				{
-					throw new InvalidOperationException("AttemptStatus не определен");
-				}
+					{
+						throw new InvalidOperationException("AttemptStatus не определен");
+					}
 			}
 
 			UpdateImage();
