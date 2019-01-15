@@ -23,6 +23,11 @@
         AttemptResult MakeAttempt(char c);
 
 		/// <summary>
+		/// Количество неверных попыток
+		/// </summary>
+		int WrongAttemptsCount { get; set; }
+
+		/// <summary>
 		/// Загаданное слово
 		/// </summary>
 		string Word { get; set; }
