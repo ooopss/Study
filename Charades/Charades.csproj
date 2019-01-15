@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttemptResult.cs" />
+    <Compile Include="AttemptStatus.cs" />
     <Compile Include="DualGameCredentials.cs" />
     <Compile Include="DualGameSettings.cs" />
     <Compile Include="LeadersForm.cs">

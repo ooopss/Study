@@ -31,7 +31,7 @@ namespace курсач
 		/// <param name="e"></param>
 		private void ButtonStartGameClick(object sender, EventArgs e)
 		{
-			using(var newNameForm = new NewName())
+			using (var newNameForm = new NewName())
 			{
 				newNameForm.ShowDialog();
 				_playerName = newNameForm.PlayerName;
@@ -74,7 +74,8 @@ namespace курсач
 		/// <param name="e"></param>
 		private void ButtonMakeAttemptClick(object sender, EventArgs e)
 		{
-			var text = TextBoxAttempt.Text.ToLower(); // преобразуем текстовый ввод в нижний регистр
+			// преобразуем текстовый ввод в нижний регистр и чистим от пробелов
+			var text = TextBoxAttempt.Text.ToLower().Trim();
 			if (text.Length == 0)
 			{
 				TextBoxAttempt.Focus();
@@ -85,15 +86,9 @@ namespace курсач
 
 			var result = _game.MakeAttempt(letter);
 
-			if (result.IsSuccess) // успешная попытка
+			switch (result.Status)
 			{
-				// для каждой позиции из угаданных показать букву
-				foreach (var item in result.AllLetterPositions)
-				{
-					_letters[item] = letter;
-				}
-
-				if (result.IsWordGuessed)
+				case AttemptStatus.WordGuessed: // слово угадано целиком
 				{
 					var newItem = new LeaderRecord
 					{
@@ -105,25 +100,43 @@ namespace курсач
 					};
 
 					_manager.SaveLeaderResult(newItem);
+					_letters = _game.Word.ToCharArray();
 
 					MessageBox.Show("Вы победили!");
+					break;
 				}
-			}
-			else if (result.IsGameFailed) // game over
-			{
-				// показать полную виселицу и слово целиком
-				_imageIndex = 9;
-				_letters = _game.Word.ToCharArray();
-				MessageBox.Show("Вы проиграли!");
-			}
-			else if (result.IsAttemptDuplicated)
-			{
-				MessageBox.Show("Уже было...");
-			}
-			else // попытка неудачная
-			{
-				// прибавить 1 к индексу текущего изображения
-				_imageIndex++;
+				case AttemptStatus.LetterGuessed: // успешная попытка
+				{
+					// для каждой позиции из угаданных показать букву
+					foreach (var item in result.AllLetterPositions)
+					{
+						_letters[item] = letter;
+					}
+					break;
+				}
+				case AttemptStatus.GameFailed: // game over
+				{
+					// показать полную виселицу и слово целиком
+					_imageIndex = 9;
+					_letters = _game.Word.ToCharArray();
+					MessageBox.Show("Вы проиграли!");
+					break;
+				}
+				case AttemptStatus.Duplicated:
+				{
+					MessageBox.Show("Уже было...");
+					break;
+				}
+				case AttemptStatus.Failed: // попытка неудачная
+				{
+					// прибавить 1 к индексу текущего изображения
+					_imageIndex++;
+					break;
+				}
+				default:
+				{
+					throw new InvalidOperationException("AttemptStatus не определен");
+				}
 			}
 
 			UpdateImage();
