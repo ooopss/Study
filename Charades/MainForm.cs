@@ -7,11 +7,12 @@ namespace курсач
 	public partial class MainForm : Form
 	{
 		private IGame _game;
+		private readonly ILeadersManager _manager;
 
 		// TODO research можно ли реализовать INotifyPropertyChanged для _letters и _imageIndex
 		private char[] _letters;
 		private int _imageIndex;
-		private readonly ILeadersManager _manager;
+
 		private string _playerName;
 		private DateTime _startTime;
 
@@ -63,7 +64,9 @@ namespace курсач
 			}
 
 			_imageIndex = 0;
+			// обновить изображение
 			UpdateImage();
+			//показать буквы
 			ShowLetters();
 		}
 
@@ -117,7 +120,7 @@ namespace курсач
 				case AttemptStatus.GameFailed: // game over
 					{
 						// показать полную виселицу и слово целиком
-						_imageIndex = 9;
+						_imageIndex = 10  ;
 						_letters = _game.Word.ToCharArray();
 						MessageBox.Show("Вы проиграли!");
 						break;
