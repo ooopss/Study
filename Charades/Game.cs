@@ -56,7 +56,7 @@ namespace курсач
 
 			var allPositions = GetAllPositions(c.ToString());
 			_lettersGuessedCount += allPositions.Count;
-			var result = new AttemptResult();
+			
 			if (_lettersGuessedCount == Word.Length)
 			{
 				return new AttemptResult
