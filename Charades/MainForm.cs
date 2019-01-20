@@ -9,8 +9,6 @@ namespace курсач
 		private IGame _game;
 		private readonly ILeadersManager _manager;
 
-		// TODO research(проводить иследования) можно ли реализовать
-		// INotifyPropertyChanged(уведомлять об измении свойства) для _letters и _imageIndex
 		private char[] _letters;
 		private int _imageIndex;
 
@@ -143,7 +141,7 @@ namespace курсач
 					}
 			}
 
-			UpdateImage(); // обновление картинки, а то забуду
+			UpdateImage(); // обновление картинки
 			ShowLetters();
 
 			TextBoxAttempt.Text = string.Empty;
