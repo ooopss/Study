@@ -1,6 +1,6 @@
 ﻿namespace курсач
 {
-    public class SingleGameCredentials
+    public class SingleGameParameters
     {
         public int WordLength { get; set; }
     }

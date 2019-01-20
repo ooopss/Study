@@ -9,7 +9,8 @@ namespace курсач
 		private IGame _game;
 		private readonly ILeadersManager _manager;
 
-		// TODO research можно ли реализовать INotifyPropertyChanged для _letters и _imageIndex
+		// TODO research(проводить иследования) можно ли реализовать
+		// INotifyPropertyChanged(уведомлять об измении свойства) для _letters и _imageIndex
 		private char[] _letters;
 		private int _imageIndex;
 
@@ -40,7 +41,7 @@ namespace курсач
 
 			_startTime = DateTime.Now;
 
-			var isSingleGame = RadioButtonSingle.Checked;
+			var isSingleGame = RadioButtonSingle.Checked; // одиночная игра
 			if (isSingleGame)
 			{
 				var credentials = _game.StartSingleGame();
@@ -53,8 +54,8 @@ namespace курсач
 				// преобразовать к ниженму регистру, ведь Кошка == кошка
 				var word = TextBoxWord.Text.Trim().ToLower();
 				TextBoxWord.Text = string.Empty;
-
-				var settings = new DualGameSettings
+				// настройки двойной игры
+				var settings = new DualGameSettings 
 				{
 					Word = word
 				};
@@ -120,12 +121,12 @@ namespace курсач
 				case AttemptStatus.GameFailed: // game over
 					{
 						// показать полную виселицу и слово целиком
-						_imageIndex = 10  ;
+						_imageIndex = 10;
 						_letters = _game.Word.ToCharArray();
 						MessageBox.Show("Вы проиграли!");
 						break;
 					}
-				case AttemptStatus.Duplicated:
+				case AttemptStatus.Duplicated: // если назвали одну и ту букву
 					{
 						MessageBox.Show("Уже было...");
 						break;
@@ -142,7 +143,7 @@ namespace курсач
 					}
 			}
 
-			UpdateImage();
+			UpdateImage(); // обновление картинки, а то забуду
 			ShowLetters();
 
 			TextBoxAttempt.Text = string.Empty;

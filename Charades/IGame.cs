@@ -6,14 +6,14 @@
         /// Начать одиночную игру
         /// </summary>
         /// <returns>Учетные данные для одиночной игры</returns>
-        SingleGameCredentials StartSingleGame();
+        SingleGameParameters StartSingleGame();
 
         /// <summary>
         /// Запустить двойную игру
         /// </summary>
         /// <param name="settings">Настройки игры</param>
         /// <returns>Двойные игровые данные </returns>
-        DualGameCredentials StartDualGame(DualGameSettings settings);
+        DualGameParameters StartDualGame(DualGameSettings settings);
         
         /// <summary>
         /// Сделать попытку угадать слово по букве

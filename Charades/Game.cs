@@ -21,11 +21,10 @@ namespace курсач
 		public string Word { get; set; }
 
 		/// <summary>
-		/// Количество удачных попыток???
+		/// Счетчик неправильных попыток
 		/// </summary>
 		public int WrongAttemptsCount { get; set; }
-
-		// 
+		
 		public Game(IWordGenerator wordGenerator)
 		{
 			_wordGenerator = wordGenerator;
@@ -73,17 +72,17 @@ namespace курсач
 			};
 		} 
 
-		public DualGameCredentials StartDualGame(DualGameSettings settings)
+		public DualGameParameters StartDualGame(DualGameSettings settings)
 		{
 			WrongAttemptsCount = 0;
 			_lettersGuessedCount = 0;
 			LettersTryed.Clear();
 
 			Word = settings.Word;
-			return new DualGameCredentials();
+			return new DualGameParameters();
 		}
 		// учетные данные для одиночной игры
-		public SingleGameCredentials StartSingleGame()
+		public SingleGameParameters StartSingleGame()
 		{
 			WrongAttemptsCount = 0;
 			_lettersGuessedCount = 0;
@@ -91,9 +90,10 @@ namespace курсач
 
 			Word = _wordGenerator.GetNewWord();
 
-			var singleGameCredentials = new SingleGameCredentials();
-
-			singleGameCredentials.WordLength = Word.Length;
+			var singleGameCredentials = new SingleGameParameters
+			{
+				WordLength = Word.Length
+			};
 
 			return singleGameCredentials;
 		}
