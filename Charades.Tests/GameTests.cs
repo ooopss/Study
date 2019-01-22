@@ -1,15 +1,10 @@
 ﻿using Moq;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using курсач;
 
 namespace Charades.Tests
 {
-    [TestFixture(Category = "Unit")]
+	[TestFixture(Category = "Unit")]
     public class GameTests
     {
         // class under tests
@@ -34,7 +29,7 @@ namespace Charades.Tests
             var result = _game.MakeAttempt('о');
 
             // assert
-            Assert.AreEqual(true, result.IsSuccess);
+            Assert.AreEqual(result.Status, AttemptStatus.WordGuessed);
             Assert.AreEqual(3, result.AllLetterPositions.Count);
             CollectionAssert.Contains(result.AllLetterPositions, 1);
             CollectionAssert.Contains(result.AllLetterPositions, 3);
@@ -51,7 +46,7 @@ namespace Charades.Tests
             var result = _game.MakeAttempt('р');
 
             // assert
-            Assert.AreEqual(false, result.IsSuccess);
+            Assert.AreEqual(result.Status, AttemptStatus.GameFailed);
         }
     }
 }
