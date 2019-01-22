@@ -1,6 +1,6 @@
 ﻿namespace курсач
 {
-    public class DualGameCredentials
+    public class DualGameParameters
     {
     }
 }

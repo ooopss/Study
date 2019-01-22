@@ -52,10 +52,10 @@
 			this.ButtonOk.UseVisualStyleBackColor = true;
 			this.ButtonOk.Click += new System.EventHandler(this.ButtonOkClick);
 			// 
-			// textBox1
+			// TextBoxName
 			// 
 			this.TextBoxName.Location = new System.Drawing.Point(18, 73);
-			this.TextBoxName.Name = "textBox1";
+			this.TextBoxName.Name = "TextBoxName";
 			this.TextBoxName.Size = new System.Drawing.Size(144, 20);
 			this.TextBoxName.TabIndex = 2;
 			// 

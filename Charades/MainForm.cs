@@ -7,11 +7,11 @@ namespace курсач
 	public partial class MainForm : Form
 	{
 		private IGame _game;
+		private readonly ILeadersManager _manager;
 
-		// TODO research можно ли реализовать INotifyPropertyChanged для _letters и _imageIndex
 		private char[] _letters;
 		private int _imageIndex;
-		private readonly ILeadersManager _manager;
+
 		private string _playerName;
 		private DateTime _startTime;
 
@@ -31,7 +31,7 @@ namespace курсач
 		/// <param name="e"></param>
 		private void ButtonStartGameClick(object sender, EventArgs e)
 		{
-			using(var newNameForm = new NewName())
+			using (var newNameForm = new NewName())
 			{
 				newNameForm.ShowDialog();
 				_playerName = newNameForm.PlayerName;
@@ -39,7 +39,7 @@ namespace курсач
 
 			_startTime = DateTime.Now;
 
-			var isSingleGame = RadioButtonSingle.Checked;
+			var isSingleGame = RadioButtonSingle.Checked; // одиночная игра
 			if (isSingleGame)
 			{
 				var credentials = _game.StartSingleGame();
@@ -52,8 +52,8 @@ namespace курсач
 				// преобразовать к ниженму регистру, ведь Кошка == кошка
 				var word = TextBoxWord.Text.Trim().ToLower();
 				TextBoxWord.Text = string.Empty;
-
-				var settings = new DualGameSettings
+				// настройки двойной игры
+				var settings = new DualGameSettings 
 				{
 					Word = word
 				};
@@ -63,7 +63,9 @@ namespace курсач
 			}
 
 			_imageIndex = 0;
+			// обновить изображение
 			UpdateImage();
+			//показать буквы
 			ShowLetters();
 		}
 
@@ -74,7 +76,8 @@ namespace курсач
 		/// <param name="e"></param>
 		private void ButtonMakeAttemptClick(object sender, EventArgs e)
 		{
-			var text = TextBoxAttempt.Text.ToLower(); // преобразуем текстовый ввод в нижний регистр
+			// преобразуем текстовый ввод в нижний регистр и чистим от пробелов
+			var text = TextBoxAttempt.Text.ToLower().Trim();
 			if (text.Length == 0)
 			{
 				TextBoxAttempt.Focus();
@@ -85,48 +88,60 @@ namespace курсач
 
 			var result = _game.MakeAttempt(letter);
 
-			if (result.IsSuccess) // успешная попытка
+			switch (result.Status)
 			{
-				// для каждой позиции из угаданных показать букву
-				foreach (var item in result.AllLetterPositions)
-				{
-					_letters[item] = letter;
-				}
-
-				if (result.IsWordGuessed)
-				{
-					var newItem = new LeaderRecord
+				case AttemptStatus.WordGuessed: // слово угадано целиком
 					{
-						Name = _playerName,
-						ElapsedTime = DateTime.Now - _startTime,
-						Date = DateTime.Today,
-						Word = _game.Word,
-						WrongAttempts = _game.WrongAttemptsCount
-					};
+						var newItem = new LeaderRecord
+						{
+							Name = _playerName,
+							ElapsedTime = DateTime.Now - _startTime,
+							Date = DateTime.Today,
+							Word = _game.Word,
+							WrongAttempts = _game.WrongAttemptsCount
+						};
 
-					_manager.SaveLeaderResult(newItem);
+						_manager.SaveLeaderResult(newItem);
+						_letters = _game.Word.ToCharArray();
 
-					MessageBox.Show("Вы победили!");
-				}
-			}
-			else if (result.IsGameFailed) // game over
-			{
-				// показать полную виселицу и слово целиком
-				_imageIndex = 9;
-				_letters = _game.Word.ToCharArray();
-				MessageBox.Show("Вы проиграли!");
-			}
-			else if (result.IsAttemptDuplicated)
-			{
-				MessageBox.Show("Уже было...");
-			}
-			else // попытка неудачная
-			{
-				// прибавить 1 к индексу текущего изображения
-				_imageIndex++;
+						MessageBox.Show("Вы победили!");
+						break;
+					}
+				case AttemptStatus.LetterGuessed: // успешная попытка
+					{
+						// для каждой позиции из угаданных показать букву
+						foreach (var item in result.AllLetterPositions)
+						{
+							_letters[item] = letter;
+						}
+						break;
+					}
+				case AttemptStatus.GameFailed: // game over
+					{
+						// показать полную виселицу и слово целиком
+						_imageIndex = 10;
+						_letters = _game.Word.ToCharArray();
+						MessageBox.Show("Вы проиграли!");
+						break;
+					}
+				case AttemptStatus.Duplicated: // если назвали одну и ту букву
+					{
+						MessageBox.Show("Уже было...");
+						break;
+					}
+				case AttemptStatus.Failed: // попытка неудачная
+					{
+						// прибавить 1 к индексу текущего изображения
+						_imageIndex++;
+						break;
+					}
+				default:
+					{
+						throw new InvalidOperationException("AttemptStatus не определен");
+					}
 			}
 
-			UpdateImage();
+			UpdateImage(); // обновление картинки
 			ShowLetters();
 
 			TextBoxAttempt.Text = string.Empty;
